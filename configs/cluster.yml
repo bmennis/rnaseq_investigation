@@ -1,0 +1,5 @@
+__default__:
+  h_vmem: 20G
+  mem_free: 20G
+  m_mem_free: 20G
+  threads: 1

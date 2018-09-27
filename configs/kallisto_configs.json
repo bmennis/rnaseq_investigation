@@ -1,0 +1,6 @@
+{"FASTQDIR":"/mnt/isilon/dbhi_bfx/xie/Brian_folder/rnaseq_investigation/data/raw/fq_files/",
+"KINDEX":"/mnt/isilon/dbhi_bfx/xie/kallisto_data/mouse/Mus_musculus.GRCm38.cdna.all.idx",
+"OUTPUTFILE":"/mnt/isilon/dbhi_bfx/xie/Brian_folder/rnaseq_investigation/data/interim/TPM.txt",
+"SCRIPTSDIR":"/mnt/isilon/dbhi_bfx/xie/Brian_folder/rnaseq_investigation/src/scripts/",
+"NUMTHREADS":"20"
+}
