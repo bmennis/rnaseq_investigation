@@ -1,0 +1,10 @@
+data/
+*~
+*#
+src/rules/.snakemake
+*.#*
+src/scripts/nimcache
+__pycache__/
+notebooks/.ipynb_checkpoints/
+snakejob.*
+.snakemake
