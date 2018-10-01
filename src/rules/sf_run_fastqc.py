@@ -12,3 +12,6 @@ rule run_multiqc:
     input: directory(DATA + 'interim/fastqc_files/')
     output: directory(DATA + 'interim/fastqc_html/')
     shell: 'multiqc -o {output} {input}' 
+
+rule prep_deseq2:
+    shell: 'Rscript {SCRIPTS}HumanRNAseq_step1.R'
