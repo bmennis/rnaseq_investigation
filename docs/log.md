@@ -1,3 +1,6 @@
+###10-5-2018
+*Finish updating pipeline for deseq2 and adjust figures created to label samples on PCA
+
 ###10-4-2018
 *Adjust DEseq2 rule in pipeline
 
