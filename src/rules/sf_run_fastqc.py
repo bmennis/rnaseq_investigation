@@ -14,4 +14,15 @@ rule run_multiqc:
     shell: 'multiqc -o {output} {input}' 
 
 rule prep_deseq2:
-    shell: 'Rscript {SCRIPTS}HumanRNAseq_step1.R'
+    input:
+        fq_dir = directory(DATA + 'raw/fq_files/'),
+        gene_ann = DATA + 'interim/annotations/{gene_in}.txt',
+        samples = DATA + 'interim/annotations/directory_sample_filtered.txt',
+    output: 
+        csv = DATA + 'interim/deseq2_output/condition_treated_results_filtered_{gene_in}.csv',
+        pca = DATA + 'interim/deseq2_output/rna_seq_PCA_filtered_{gene_in}.pdf',
+        cluster = DATA + 'interim/deseq2_output/rna_seq_cluster_filtered_{gene_in}.pdf'
+    shell: 'Rscript {SCRIPTS}HumanRNAseq_step1.R {input.fq_dir} {input.samples} {input.gene_ann} {output.csv} {output.pca} {output.cluster}'
+
+rule run_all_deseq2:
+    input: expand(DATA + 'interim/deseq2_output/rna_seq_cluster_filtered_{gene_in}.pdf', gene_in = ('tx2gene_full_mouse', 'tx2gene_mouse'))
