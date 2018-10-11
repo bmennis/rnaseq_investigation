@@ -45,10 +45,9 @@ dds <- DESeq(dds)
 
 res <- results(dds)
 
+resOrdered <- res[order(res$pvalue),]
 
-resOrdered <- head(res[order(res$pvalue),], n=15)
-
-write.csv(as.data.frame(resOrdered), 
+write.csv(as.data.frame(res), 
           file= out_csv)
 
 colData(dds)
