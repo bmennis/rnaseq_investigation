@@ -3,8 +3,11 @@ library(GOfuncR)
 library(data.table)
 library(tidyverse)
 
+#load in arguments passed to script
+args <- commandArgs(trailingOnly=TRUE)
+
 #load deseq2 output for filtering and analysis, set as tibble, and group by symbol
-deseq2_out <- read.csv("Desktop/deseq2_output_10_12_18/condition_treated_results_filtered_tx2gene_full_mouse.csv")
+deseq2_out <- read.csv(args[1])
 deseq2_out <- as.tibble(deseq2_out)
 deseq2_out <- deseq2_out %>% group_by(symbol)
 
@@ -39,10 +42,10 @@ mice_gene_dat <- data.frame(mice_genes,mice_gene_types)
 res_hyper_mouse = go_enrich(mice_gene_dat, organismDb='Mus.musculus')
 
 #write the 3 results of the test to csv files
-write_csv(data.frame(res_hyper_mouse[1]), "Desktop/gofuncr_results.csv")
-write_csv(data.frame(res_hyper_mouse[2]), "Desktop/gofuncr_results_input.csv")
-write_csv(data.frame(res_hyper_mouse[3]), "Desktop/gofuncr_results_anno.csv")
+write_csv(data.frame(res_hyper_mouse[1]), args[2])
+write_csv(data.frame(res_hyper_mouse[2]), args[3])
+write_csv(data.frame(res_hyper_mouse[3]), args[4])
 
 #write deseq2 filtered output to csv file for GSEA analysis
-write_csv(deseq2_out_filtered, "Desktop/deseq2_results_filtered.csv")
+write_csv(deseq2_out_filtered, args[5])
 

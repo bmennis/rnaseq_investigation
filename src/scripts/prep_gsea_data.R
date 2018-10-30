@@ -1,9 +1,12 @@
+#load the arguments passed by snakemake
+args <- commandArgs(trailingOnly=TRUE)
+
 #load deseq2 data to filter and organize to run in gsea
-deseq2_filtered <- read.csv("Desktop/deseq2_results_filtered.csv")
+deseq2_filtered <- read.csv(args[1])
 
 #load annotated mouse gene symbols with homologous human 
 #gene symbols
-human_mouse_homologs <- read.table("Desktop/human_mouse_homolog.out", header = TRUE)
+human_mouse_homologs <- read.table(args[2], header = TRUE)
 human_mouse_homologs <- as.data.frame(human_mouse_homologs)
 
 #create data frame of gene symbol column and stat column 
@@ -28,7 +31,7 @@ gsea_human_dat <- gsea_mouse_human_dat %>% filter(Common_Organism_Name != "mouse
 mice_human_homolog_gsea_input <- data.frame(Symbol = gsea_human_dat[,'Symbol'],Stat = gsea_human_dat[,'stat'])
 
 #write data frame to tsv file named .rnk so that it can run in gsea 
-write_tsv(mice_human_homolog_gsea_input,"Desktop/mice_human_homolog_gsea_input.rnk")
+write_tsv(mice_human_homolog_gsea_input,args[3])
 
 
 
