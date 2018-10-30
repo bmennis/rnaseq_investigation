@@ -14,7 +14,8 @@ out_cluster <- args[6]
 ##### pre-2) load deseq2
 library(DESeq2)
 library(dplyr)
-
+library("AnnotationDbi")
+library("org.Mm.eg.db")
 library("tximport")
 library("readr")
 library(rhdf5)
@@ -45,9 +46,16 @@ dds <- DESeq(dds)
 
 res <- results(dds)
 
+res$symbol <- mapIds(org.Mm.eg.db,
+                     keys=row.names(res),
+                     column="SYMBOL",
+                     keytype="ENSEMBL",
+                     multiVals="first")
+
+
 resOrdered <- res[order(res$pvalue),]
 
-write.csv(as.data.frame(res), 
+write.csv(as.data.frame(resOrdered), 
           file= out_csv)
 
 colData(dds)
